@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NepTraVision — Live Prototype</title>
+  <style>
+    :root { --bg:#0f1419; --card:#1b232d; --fg:#e6edf3; --muted:#8b98a5; --accent:#d62728; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, sans-serif; background:var(--bg); color:var(--fg); }
+    header { padding:18px 24px; border-bottom:1px solid #2a3540; }
+    header h1 { margin:0; font-size:18px; }
+    header p { margin:4px 0 0; color:var(--muted); font-size:13px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; padding:24px; }
+    .card { background:var(--card); border-radius:10px; padding:18px; }
+    .card .label { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.05em; }
+    .card .value { font-size:30px; font-weight:600; margin-top:6px; }
+    #log { padding:0 24px 24px; }
+    #log h2 { font-size:14px; color:var(--muted); }
+    #events { max-height:240px; overflow:auto; background:var(--card); border-radius:10px; padding:12px; font-family:ui-monospace,monospace; font-size:12px; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:99px; background:#2a3540; margin-right:6px; }
+    .status { float:right; font-size:12px; color:var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="status" id="status">connecting…</span>
+    <h1>NepTraVision — Live Prototype</h1>
+    <p>Deployment-context demo. Detections stream over WebSocket from the (mock or trained) detector.</p>
+  </header>
+
+  <section class="grid">
+    <div class="card"><div class="label">Frames</div><div class="value" id="frames">0</div></div>
+    <div class="card"><div class="label">Vehicles (frame)</div><div class="value" id="vehicles">0</div></div>
+    <div class="card"><div class="label">Helmets</div><div class="value" id="helmets">0</div></div>
+    <div class="card"><div class="label">No-helmet</div><div class="value" id="nohelmet">0</div></div>
+  </section>
+
+  <section id="log">
+    <h2>Recent detections</h2>
+    <div id="events"></div>
+  </section>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const proto = location.protocol === "https:" ? "wss" : "ws";
+    const ws = new WebSocket(`${proto}://${location.host}/ws/stream`);
+
+    ws.onopen = () => { $("status").textContent = "● live"; $("status").style.color = "#3fb950"; };
+    ws.onclose = () => { $("status").textContent = "○ disconnected"; $("status").style.color = "#8b98a5"; };
+
+    ws.onmessage = (ev) => {
+      const f = JSON.parse(ev.data);
+      $("frames").textContent = f.frame_id + 1;
+      $("vehicles").textContent = f.vehicle_count;
+      $("helmets").textContent = f.helmet_count;
+      $("nohelmet").textContent = f.no_helmet_count;
+
+      const pills = f.detections
+        .map((d) => `<span class="pill">${d.cls_name} ${(d.confidence * 100) | 0}%</span>`)
+        .join("");
+      const line = document.createElement("div");
+      line.innerHTML = `#${f.frame_id} ${pills}`;
+      const log = $("events");
+      log.prepend(line);
+      while (log.childNodes.length > 40) log.removeChild(log.lastChild);
+    };
+  </script>
+</body>
+</html>
