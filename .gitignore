@@ -1,0 +1,48 @@
+# ── Python ─────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.python-version
+
+# ── Tooling caches ─────────────────────────────────────────────────────
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# ── Environment ────────────────────────────────────────────────────────
+.env
+
+# ── Heavy data: never commit raw footage, frames, or the dataset blob ──
+# The *structure* is tracked via .gitkeep; the *content* is not.
+data/raw_videos/*
+data/raw_frames/*
+data/selected/*
+data/interim/*
+data/dataset/images/**/*
+data/dataset/labels/**/*
+# Generated pointer file (contains a machine-specific absolute path).
+data/dataset/data.yaml
+!**/.gitkeep
+
+# ── Experiment outputs: runs, weights, logs, exported models ───────────
+experiments/*
+!experiments/README.md
+*.pt
+*.onnx
+*.engine
+*.tflite
+
+# ── OS / editor cruft ──────────────────────────────────────────────────
+.DS_Store
+.idea/
+.vscode/
+*.swp

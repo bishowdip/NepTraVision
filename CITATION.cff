@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use NepTraVision (code or dataset), please cite it as below."
+title: "NepTraVision: A Nepal-Specific Traffic Computer-Vision Benchmark and Lightweight Detection System"
+type: software
+authors:
+  - given-names: Bishow
+    family-names: Thapa
+    email: bishodip123@gmail.com
+version: 0.1.0
+date-released: 2026-06-20
+keywords:
+  - computer vision
+  - object detection
+  - traffic monitoring
+  - nepal
+  - edge AI
+  - benchmark dataset
+license: MIT

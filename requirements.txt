@@ -1,0 +1,13 @@
+# Core runtime for the data pipeline + CLI (laptop-friendly, no GPU needed).
+# For training/serving/analysis extras, install via the optional groups in
+# pyproject.toml, e.g.:  pip install -e ".[train]"
+typer>=0.12
+rich>=13.7
+pydantic>=2.6
+pyyaml>=6.0
+numpy>=1.26
+pandas>=2.2
+opencv-python-headless>=4.9
+imagehash>=4.3
+Pillow>=10.2
+tqdm>=4.66
