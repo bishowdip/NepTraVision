@@ -1,0 +1,8 @@
+# E4 — Quantization (edge): INT8 vs FP — accuracy drop vs speedup on CPU/Pi.
+id: e4_quantization
+description: INT8 quantization accuracy/speed trade-off on edge.
+models: [yolov8n, yolo11n]
+precisions: [fp32, fp16, int8]
+backends: [onnxruntime, tflite, tensorrt]   # use whichever the device supports
+hardware_tiers: [cpu_laptop, rpi5]
+metrics: [mAP50, latency_ms, fps, model_size_mb]

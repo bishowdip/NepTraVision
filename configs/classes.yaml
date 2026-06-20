@@ -1,0 +1,49 @@
+# Canonical class taxonomy for NepTraVision-Bench.
+# Human-readable definitions: docs/04_class_definitions.md  (FROZEN 2026-06-20).
+# Two profiles are provided; pick one with `active_profile` and freeze it before
+# annotating. Changing a profile's class list after annotation starts needs an ADR.
+
+active_profile: full
+
+profiles:
+  # ── Full 18-class scheme: vehicles + helmet compliance + traffic signs ──
+  full:
+    description: >-
+      Complete scheme. Vehicles/agents (0-6), helmet compliance (7-9),
+      traffic signs (10-17).
+    names:
+      0: motorcycle_scooter
+      1: car_van_jeep
+      2: bus_microbus
+      3: truck_tipper
+      4: tempo_erickshaw
+      5: bicycle
+      6: pedestrian
+      7: helmet
+      8: no_helmet
+      9: rider
+      10: stop_sign
+      11: no_parking
+      12: no_entry
+      13: speed_limit
+      14: pedestrian_crossing
+      15: school_zone
+      16: traffic_light
+      17: one_way
+    groups:
+      vehicle: [0, 1, 2, 3, 4, 5, 6]
+      helmet: [7, 8, 9]
+      sign: [10, 11, 12, 13, 14, 15, 16, 17]
+
+  # ── Reduced 3-class scheme for a fast first pass (see ADR-0001) ──
+  simple:
+    description: >-
+      Minimal first-pass scheme: merged two-wheeler + helmet compliance.
+      Ship vehicles-with-helmet first; add full vehicle/sign classes in v1.1.
+    names:
+      0: two_wheeler
+      1: helmet
+      2: no_helmet
+    groups:
+      vehicle: [0]
+      helmet: [1, 2]

@@ -1,0 +1,8 @@
+# E1 — Baselines: all models fine-tuned; accuracy on the held-out test set.
+# Output: results/tables/table1_accuracy.csv (mean ± std over seeds).
+id: e1_baselines
+description: Fine-tune the full model set and measure test-set accuracy.
+models: [yolov8n, yolov8s, yolov5n, yolo11n, nanodet_plus]
+seeds: [0, 1, 2]
+imgsz: 640
+metrics: [mAP50, mAP50-95, precision, recall, f1, per_class_ap, confusion_matrix]

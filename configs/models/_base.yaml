@@ -1,0 +1,23 @@
+# Shared training defaults for every benchmarked model. Per-model files override
+# only `model`/`weights`/identity; per-experiment files override protocol bits like
+# `imgsz`/`seed`. Identical augmentation across models is a benchmark requirement
+# (docs/05_experiment_protocol.md §3).
+
+train:
+  epochs: 100
+  patience: 20            # early-stopping patience (same rule for all models)
+  batch: 16
+  imgsz: 640              # overridden by the resolution sweep (320/416/640)
+  optimizer: auto
+  lr0: 0.01
+  seed: 42                # overridden per seed by the experiment
+
+augmentation:             # frozen, identical across all models
+  mosaic: 1.0
+  fliplr: 0.5
+  flipud: 0.0
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  degrees: 0.0
+  scale: 0.5

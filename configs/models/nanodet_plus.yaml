@@ -1,0 +1,9 @@
+# Non-YOLO contrast point. NanoDet-Plus is an anchor-free efficient detector.
+# Alternatives: mobilenet_ssd, efficientdet_lite0. Training is outside Ultralytics,
+# so the training runner dispatches on `framework` (see models/registry.py).
+extends: _base.yaml
+name: nanodet_plus
+framework: nanodet
+weights: nanodet-plus-m_320.pth
+role: non-YOLO architecture contrast point
+approx_params_m: 1.2

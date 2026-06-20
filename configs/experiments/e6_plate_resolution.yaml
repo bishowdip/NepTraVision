@@ -1,0 +1,10 @@
+# E6 — Plate-resolution sub-study: the ANPR blocker, turned into evidence.
+# Measure mean plate px-height vs distance/resolution; run OCR on plate crops at
+# increasing resolutions to find the legibility threshold (CER below a usable bar).
+# Output: "ANPR needs >= N px plate height; typical Nepali CCTV gives M < N."
+id: e6_plate_resolution
+description: Plate pixel-height vs OCR character-error-rate legibility threshold.
+ocr_engine: easyocr         # easyocr | paddleocr
+plate_height_px_sweep: [8, 12, 16, 20, 24, 32, 48, 64]
+cer_usable_threshold: 0.20  # CER below this == "usable"
+metrics: [mean_plate_px_height, cer_by_px_height, legibility_threshold_px]
