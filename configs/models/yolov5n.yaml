@@ -1,0 +1,7 @@
+# YOLOv5 nano — strong, well-known nano baseline.
+extends: _base.yaml
+name: yolov5n
+framework: ultralytics
+weights: yolov5nu.pt       # Ultralytics-packaged YOLOv5n
+role: strong nano baseline
+approx_params_m: 2.6

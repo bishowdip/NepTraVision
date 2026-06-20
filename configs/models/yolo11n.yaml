@@ -1,0 +1,7 @@
+# YOLO11 nano — one recent nano architecture (swap to yolov10n if preferred).
+extends: _base.yaml
+name: yolo11n
+framework: ultralytics
+weights: yolo11n.pt
+role: recent nano model
+approx_params_m: 2.6

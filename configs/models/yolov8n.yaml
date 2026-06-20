@@ -1,0 +1,7 @@
+# YOLOv8 nano — fastest baseline; the project's existing base model.
+extends: _base.yaml
+name: yolov8n
+framework: ultralytics
+weights: yolov8n.pt        # COCO-pretrained; fine-tuned on NepTraVision
+role: fastest nano baseline
+approx_params_m: 3.2

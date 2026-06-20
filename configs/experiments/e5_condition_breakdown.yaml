@@ -1,0 +1,8 @@
+# E5 — Condition breakdown: accuracy sliced by metadata. Where does it break?
+id: e5_condition_breakdown
+description: Per-condition accuracy from the test-set metadata slices.
+model: yolov8s              # best accuracy model, single seed for the slice study
+seed: 0
+imgsz: 640
+slice_by: [time_of_day, weather, density]
+metrics: [mAP50, recall, per_class_ap]

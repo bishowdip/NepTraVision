@@ -1,0 +1,7 @@
+# YOLOv8 small — balanced accuracy/speed option.
+extends: _base.yaml
+name: yolov8s
+framework: ultralytics
+weights: yolov8s.pt
+role: balanced option
+approx_params_m: 11.2

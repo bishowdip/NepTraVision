@@ -1,0 +1,10 @@
+# E2 — Efficiency sweep: each model × each hardware tier.
+# Output: results/tables/table2_efficiency.csv + Pareto inputs.
+id: e2_efficiency
+description: Latency / FPS / memory per model per hardware tier.
+models: [yolov8n, yolov8s, yolov5n, yolo11n, nanodet_plus]
+imgsz: 640
+hardware_tiers: [gpu_t4, cpu_laptop, rpi5]   # report whichever are available
+warmup_iters: 10
+measure_iters: 100
+metrics: [latency_ms, fps, params_m, flops_g, model_size_mb, peak_ram_mb, power_w]

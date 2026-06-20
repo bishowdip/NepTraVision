@@ -1,0 +1,51 @@
+# Dataset construction policy. Read by the `neptravision data …` pipeline.
+# Rationale: docs/02_dataset_guide.md
+
+name: NepTraVision-Bench
+version: "0.0"
+
+# ── Frame extraction (FFmpeg) ──
+extraction:
+  fps: 1                 # 1 frame/sec; use 0.5 for very dense traffic to cut duplicates
+  image_format: jpg
+  jpg_quality: 2         # ffmpeg -q:v (2 = high quality)
+
+# ── Near-duplicate removal (perceptual hash) ──
+deduplicate:
+  hash: phash            # phash | dhash | ahash | whash
+  hash_size: 8
+  # Hamming distance below which two frames are "duplicates". Lower = stricter.
+  threshold: 6
+
+# ── Image selection / curation heuristics ──
+select:
+  # Drop frames blurrier than this (variance of Laplacian). Lower = blurrier.
+  blur_min_variance: 100.0
+  # Drop frames with no annotated objects once labels exist.
+  drop_empty: true
+  # Minimum object box side in pixels to be worth keeping/annotating.
+  min_object_px: 15
+
+# ── Train/val/test split (LEAKAGE-SAFE) ──
+split:
+  ratios: { train: 0.70, val: 0.15, test: 0.15 }
+  # CRITICAL: never split randomly. Group by this metadata column so all frames
+  # from one video/location/session stay in one split.
+  group_by: source_id
+  # Try to balance these condition columns across splits where possible.
+  stratify_by: [time_of_day, weather]
+  seed: 42
+
+# ── Quality control ──
+quality_control:
+  double_annotate_subset: 400   # images double-annotated for agreement
+  spot_check_fraction: 0.10
+  iou_match_threshold: 0.5      # for inter-annotator agreement matching
+
+# ── Targets (from the charter) ──
+targets:
+  images: { minimum: 1500, good: 3000, stretch: 5000 }
+  boxes:  { minimum: 5000, strong: 20000 }
+  min_locations: 3
+  min_times_of_day: 2
+  min_weather_conditions: 2

@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neptravision"
+version = "0.1.0"
+description = "A Nepal-specific traffic computer-vision benchmark and lightweight detection system."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Bishow Thapa", email = "bishodip123@gmail.com" }]
+keywords = [
+    "computer-vision", "object-detection", "yolo", "traffic-monitoring",
+    "nepal", "benchmark", "edge-ai", "intelligent-transportation-systems",
+]
+
+# Core dependencies needed by the data pipeline and the CLI. These are kept
+# light on purpose so the data tooling runs on a laptop without a GPU stack.
+dependencies = [
+    "typer>=0.12",
+    "rich>=13.7",
+    "pydantic>=2.6",
+    "pyyaml>=6.0",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "opencv-python-headless>=4.9",
+    "imagehash>=4.3",
+    "Pillow>=10.2",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+# Training / model zoo. Installed on the GPU box (Colab/Kaggle) only.
+train = [
+    "ultralytics>=8.2",
+    "torch>=2.2",
+    "torchvision>=0.17",
+]
+# Real-time prototype dashboard.
+serve = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "websockets>=12.0",
+]
+# Analysis / plotting for the paper.
+analysis = [
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "scikit-learn>=1.4",
+]
+# Developer tooling.
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4",
+    "mypy>=1.9",
+]
+
+[project.scripts]
+neptravision = "neptravision.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# Typer's API *requires* calling Option()/Argument() in argument defaults — this is
+# the documented pattern, not a real bug.
+"src/neptravision/cli.py" = ["B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+packages = ["neptravision"]
