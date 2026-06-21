@@ -3,6 +3,18 @@
 All notable changes to NepTraVision are recorded here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/). Dates are absolute.
 
+## [Unreleased] — 2026-06-21 — Capture log for phone footage (M1 prep)
+
+### Added
+- `neptravision/data/capture_log.py` + `neptravision data probe-videos`: read embedded
+  video metadata (capture time → time_of_day, GPS, resolution, fps, device) from
+  `data/raw_videos/` via ffprobe into a per-video `capture_log.csv`. Solves "my phone
+  doesn't overlay time/location" — that data is in the file; only weather & density need
+  manual entry.
+- `build_template`/`data build-manifest --from-capture-log`: each frame inherits its
+  source video's conditions, so conditions are logged once per video, not per frame.
+- iPhone field-capture guidance in `data/README.md`; tests for the pure helpers.
+
 ## [Unreleased] — 2026-06-21 — Nepal landscape & feasibility study
 
 ### Added

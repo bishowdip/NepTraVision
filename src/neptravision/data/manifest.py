@@ -39,12 +39,20 @@ def source_id_from_filename(filename: str) -> str:
     return stem.rsplit("_", 1)[0] if "_" in stem else stem
 
 
-def build_template(images: list[Path], out_csv: Path) -> Path:
+def build_template(
+    images: list[Path],
+    out_csv: Path,
+    source_conditions: dict[str, dict[str, str]] | None = None,
+) -> Path:
     """Write a manifest skeleton for ``images`` with ``source_id`` pre-filled.
 
-    Condition columns are left blank for the collector to complete. Existing rows in
-    ``out_csv`` are preserved (we only append rows for images not already listed).
+    Condition columns are left blank for the collector to complete — unless
+    ``source_conditions`` is supplied (a ``source_id → {column: value}`` map, e.g. from
+    the per-video capture log), in which case each frame inherits its source's conditions
+    automatically. Existing rows in ``out_csv`` are preserved; manually-entered values are
+    never overwritten by the propagated defaults.
     """
+    source_conditions = source_conditions or {}
     existing: dict[str, dict[str, str]] = {}
     if out_csv.is_file():
         existing = {r["filename"]: r for r in read(out_csv)}
@@ -57,9 +65,14 @@ def build_template(images: list[Path], out_csv: Path) -> Path:
         for img in sorted(images):
             row = existing.get(img.name)
             if row is None:
+                src = source_id_from_filename(img.name)
                 row = {f: "" for f in MANIFEST_FIELDS}
                 row["filename"] = img.name
-                row["source_id"] = source_id_from_filename(img.name)
+                row["source_id"] = src
+                # inherit source-level conditions where we have them
+                for field_name, value in source_conditions.get(src, {}).items():
+                    if field_name in row and value:
+                        row[field_name] = value
                 n_new += 1
             writer.writerow({f: row.get(f, "") for f in MANIFEST_FIELDS})
 

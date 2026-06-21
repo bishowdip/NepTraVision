@@ -56,6 +56,10 @@ class ProjectPaths:
         return self.data / "raw_videos"
 
     @property
+    def capture_log_csv(self) -> Path:
+        return self.raw_videos / "capture_log.csv"
+
+    @property
     def raw_frames(self) -> Path:
         return self.data / "raw_frames"
 

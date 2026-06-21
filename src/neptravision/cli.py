@@ -121,15 +121,55 @@ def data_select(
     )
 
 
+@data_app.command("probe-videos")
+def data_probe_videos() -> None:
+    """Read embedded metadata from data/raw_videos/ into a per-video capture log.
+
+    Auto-fills capture time, GPS, resolution, fps, and device from each file. You then
+    open the CSV and fill the columns no camera records: weather and density.
+    """
+    from .data import capture_log
+
+    PATHS.ensure(PATHS.raw_videos)
+    out = capture_log.build_capture_log(PATHS.raw_videos, PATHS.capture_log_csv)
+    console.print(
+        f"Capture log at {out}\n"
+        "[yellow]→ open it and fill the [bold]weather[/bold] and [bold]density[/bold] "
+        "columns per clip (location too, if GPS was off).[/yellow]"
+    )
+
+
 @data_app.command("build-manifest")
-def data_build_manifest() -> None:
-    """Create/update data/dataset/metadata.csv from the selected images."""
-    from .data import deduplicate, manifest
+def data_build_manifest(
+    from_capture_log: bool = typer.Option(
+        True, help="Inherit per-video conditions from data/raw_videos/capture_log.csv."
+    ),
+) -> None:
+    """Create/update data/dataset/metadata.csv from the selected images.
+
+    By default, each frame inherits its source video's conditions (time/weather/density/
+    location/resolution) from the capture log, so you log conditions once per video — not
+    once per frame.
+    """
+    from .data import capture_log, deduplicate, manifest
 
     images = deduplicate.list_images(PATHS.selected)
     PATHS.ensure(PATHS.dataset)
-    manifest.build_template(images, PATHS.metadata_csv)
-    console.print(f"Manifest at {PATHS.metadata_csv} — fill in the condition columns.")
+
+    source_conditions = None
+    if from_capture_log and PATHS.capture_log_csv.is_file():
+        source_conditions = capture_log.as_source_conditions(
+            capture_log.read(PATHS.capture_log_csv)
+        )
+        console.print(f"Inheriting conditions from {PATHS.capture_log_csv}.")
+    elif from_capture_log:
+        console.print(
+            "[yellow]No capture log yet — run 'neptravision data probe-videos' first "
+            "to auto-fill conditions.[/yellow]"
+        )
+
+    manifest.build_template(images, PATHS.metadata_csv, source_conditions)
+    console.print(f"Manifest at {PATHS.metadata_csv} — review/complete any blank columns.")
 
 
 @data_app.command("make-splits")
