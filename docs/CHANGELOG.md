@@ -3,6 +3,31 @@
 All notable changes to NepTraVision are recorded here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/). Dates are absolute.
 
+## [Unreleased] — 2026-06-21 — Nepal landscape & feasibility study
+
+### Added
+- `docs/09_nepal_landscape.md`: Nepal-first dossier — road-safety motivation (with
+  figures), an inventory of existing Nepali datasets/models/works, regional precedent
+  (IDD/DriveIndia/UVH-26/Bangladesh/RideSafe), infrastructure context, six enumerated
+  evidence-backed gaps (G1–G6), a flagged issue/risk list, and issue→solution actions.
+- `docs/10_feasibility_study.md`: per-task feasibility verdict (GO), with data, legal
+  (Privacy Act 2075), compute, skills, timeline, and publication assessments + a risk
+  register.
+- `docs/nepal_assets_inventory.csv`: machine-readable inventory of existing Nepali
+  assets and their usefulness/verification status.
+- `docs/decisions/0002-anpr-reframing-embossed-plates.md` (ADR-0002): reframe E6/ANPR
+  around plate *resolution* rather than Devanagari *script*, given Nepal's mandatory
+  ANPR-ready embossed-plate rollout (Sept 2025).
+- Nepal-context citations added to `paper/references.bib`.
+
+### Key findings
+- No public detection-grade Nepali traffic dataset exists; the closest asset
+  (vehicles-nepal, 4,797 imgs) is classification-only with 2 coarse classes → confirms C1.
+- Nepali CV community is active (IOEGC: sign-language, medical) but absent on *traffic
+  detection* → gap sharpened to "no traffic-detection CV / no Nepali traffic dataset."
+- Motorcycles are ~79–84% of vehicles and ~2/3 of fatal crashes → the vehicle+helmet
+  focus is the highest-impact, data-backed choice.
+
 ## [Unreleased] — 2026-06-21 — Literature review (Week 2, M0)
 
 ### Added

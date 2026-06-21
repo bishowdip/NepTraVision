@@ -149,6 +149,12 @@ pip install -e ".[serve]"   # fastapi + uvicorn
 
 ### What's done so far (M0)
 
+- ✅ **Nepal landscape & feasibility study:** Nepal-first inventory of existing datasets,
+  models, and works; six enumerated, evidence-backed gaps (G1–G6); a risk register with
+  mitigations; and a GO feasibility verdict. Surfaced the embossed-plate rollout →
+  [ADR-0002](docs/decisions/0002-anpr-reframing-embossed-plates.md) reframes the ANPR
+  story. See [`docs/09_nepal_landscape.md`](docs/09_nepal_landscape.md) and
+  [`docs/10_feasibility_study.md`](docs/10_feasibility_study.md).
 - ✅ **Literature review (Week 2):** thematic synthesis across detectors, edge
   benchmarking, regional-traffic datasets, helmet & sign recognition, and the Nepali
   context; an evidenced 5-link gap argument; a verified seed bibliography
@@ -187,6 +193,8 @@ A detailed, dated changelog lives in [`docs/CHANGELOG.md`](docs/CHANGELOG.md).
 | Understand the *why* and the contract of this project | [`docs/00_project_charter.md`](docs/00_project_charter.md) |
 | Understand the code architecture & module boundaries | [`docs/01_architecture.md`](docs/01_architecture.md) |
 | See the literature landscape & the evidenced gap argument | [`docs/08_literature_review.md`](docs/08_literature_review.md), [`docs/literature_matrix.csv`](docs/literature_matrix.csv) |
+| Know what Nepali datasets/works exist & the precise gaps | [`docs/09_nepal_landscape.md`](docs/09_nepal_landscape.md), [`docs/nepal_assets_inventory.csv`](docs/nepal_assets_inventory.csv) |
+| Judge whether the project is doable (data/compute/legal/time) | [`docs/10_feasibility_study.md`](docs/10_feasibility_study.md) |
 | Collect & annotate data correctly | [`docs/02_dataset_guide.md`](docs/02_dataset_guide.md), [`docs/03_annotation_guidelines.md`](docs/03_annotation_guidelines.md) |
 | Know exactly what each class means | [`docs/04_class_definitions.md`](docs/04_class_definitions.md) |
 | Run the experiments / reproduce results | [`docs/05_experiment_protocol.md`](docs/05_experiment_protocol.md), [`docs/06_reproducibility.md`](docs/06_reproducibility.md) |
