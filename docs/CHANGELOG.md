@@ -3,6 +3,26 @@
 All notable changes to NepTraVision are recorded here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/). Dates are absolute.
 
+## [Unreleased] — 2026-06-21 — Literature review (Week 2, M0)
+
+### Added
+- `docs/08_literature_review.md`: thematic synthesis across the five review areas
+  (detectors, edge benchmarking, regional-traffic datasets & geographic bias, helmet
+  detection, traffic-sign recognition) plus the Nepali context and the IOEGC gap.
+  Includes a reproducible search strategy, an evidenced 5-link gap argument (the
+  Introduction's spine), a reference→section map, and a tiered reading priority.
+- `paper/references.bib`: seed bibliography. Canonical detector/dataset works verified;
+  regional/recent entries flagged `VERIFY` for author/venue confirmation before
+  submission; Tier-3 "to find" sources listed.
+- `docs/literature_matrix.csv`: living per-paper reading matrix, pre-populated with
+  the works surfaced during the review.
+
+### Notes
+- Key gap evidence: Nepali traffic CV exists only for *license plates* (Pant 2015;
+  Devanagari ANPR), while regional precedent (IDD, DriveIndia, UVH-26) shows Western
+  benchmarks fail on South-Asian unstructured traffic — and no public Nepali traffic
+  *detection* dataset/benchmark exists. This underwrites contributions C1–C3.
+
 ## [0.1.0] — 2026-06-20 — Foundation (M0)
 
 ### Added

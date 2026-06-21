@@ -1,0 +1,252 @@
+% ============================================================================
+% NepTraVision — references
+% ----------------------------------------------------------------------------
+% Assembled during the Week-2 literature review (see docs/08_literature_review.md).
+%
+% VERIFICATION CONVENTION:
+%   * Entries WITHOUT a "% VERIFY" note are well-established works whose details
+%     are standard; still glance at them before final submission.
+%   * Entries WITH "% VERIFY ..." were sourced from search results / abstract
+%     metadata. Confirm the author list, venue, and year against the actual
+%     paper (open the URL) before citing in the manuscript. Do NOT ship a
+%     citation you have not opened.
+%   * Tier-3 "to find" items from the review are listed as comments at the end;
+%     add proper entries once you locate the primary sources.
+% ============================================================================
+
+% ---------------------------------------------------------------------------
+% Object-detection backbones & the YOLO family
+% ---------------------------------------------------------------------------
+@inproceedings{redmon2016yolo,
+  title     = {You Only Look Once: Unified, Real-Time Object Detection},
+  author    = {Redmon, Joseph and Divvala, Santosh and Girshick, Ross and Farhadi, Ali},
+  booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {779--788},
+  year      = {2016},
+  note      = {arXiv:1506.02640}
+}
+
+@inproceedings{ren2015faster,
+  title     = {Faster {R-CNN}: Towards Real-Time Object Detection with Region Proposal Networks},
+  author    = {Ren, Shaoqing and He, Kaiming and Girshick, Ross and Sun, Jian},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2015},
+  note      = {arXiv:1506.01497}
+}
+
+@inproceedings{liu2016ssd,
+  title     = {{SSD}: Single Shot MultiBox Detector},
+  author    = {Liu, Wei and Anguelov, Dragomir and Erhan, Dumitru and Szegedy, Christian
+               and Reed, Scott and Fu, Cheng-Yang and Berg, Alexander C.},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  pages     = {21--37},
+  year      = {2016},
+  note      = {arXiv:1512.02325}
+}
+
+@inproceedings{tan2020efficientdet,
+  title     = {{EfficientDet}: Scalable and Efficient Object Detection},
+  author    = {Tan, Mingxing and Pang, Ruoming and Le, Quoc V.},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2020},
+  note      = {arXiv:1911.09070}
+}
+
+@inproceedings{zhao2024rtdetr,
+  title     = {{DETRs} Beat {YOLOs} on Real-time Object Detection},
+  author    = {Zhao, Yian and Lv, Wenyu and Xu, Shangliang and Wei, Jinman and Wang, Guanzhong
+               and Dang, Qingqing and Liu, Yi and Chen, Jie},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2024},
+  note      = {arXiv:2304.08069 (RT-DETR)}
+}
+
+@inproceedings{wang2024yolov10,
+  title     = {{YOLOv10}: Real-Time End-to-End Object Detection},
+  author    = {Wang, Ao and Chen, Hui and Liu, Lihao and Chen, Kai and Lin, Zijia
+               and Han, Jungong and Ding, Guiguang},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2024},
+  note      = {arXiv:2405.14458}
+  % VERIFY full author list against arXiv:2405.14458
+}
+
+@software{jocher2023yolov8,
+  title    = {Ultralytics {YOLOv8}},
+  author   = {Jocher, Glenn and Chaurasia, Ayush and Qiu, Jing},
+  year     = {2023},
+  version  = {8.0.0},
+  url      = {https://github.com/ultralytics/ultralytics}
+}
+
+@software{jocher2024yolo11,
+  title    = {Ultralytics {YOLO11}},
+  author   = {Jocher, Glenn and Qiu, Jing},
+  year     = {2024},
+  url      = {https://github.com/ultralytics/ultralytics}
+  % VERIFY release year/authors on the Ultralytics YOLO11 docs page
+}
+
+@inproceedings{lin2014coco,
+  title     = {Microsoft {COCO}: Common Objects in Context},
+  author    = {Lin, Tsung-Yi and Maire, Michael and Belongie, Serge and Hays, James
+               and Perona, Pietro and Ramanan, Deva and Doll{\'a}r, Piotr and Zitnick, C. Lawrence},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  pages     = {740--755},
+  year      = {2014},
+  note      = {arXiv:1405.0312}
+}
+
+% ---------------------------------------------------------------------------
+% Edge / efficient detection & benchmarking
+% ---------------------------------------------------------------------------
+@article{alqahtani2024edge,
+  title   = {A Comprehensive Evaluation of Deep Learning Object Detection Models on Heterogeneous Edge Devices},
+  author  = {Alqahtani, Daghash K. and Cheema, Muhammad Aamir and Rodriguez, Maria A. and Toosi, Adel N.},
+  journal = {arXiv preprint arXiv:2409.16808},
+  year    = {2024},
+  url     = {https://arxiv.org/abs/2409.16808}
+}
+
+@misc{nature2026_yolo_rtdetr_energy,
+  title        = {Review of large {YOLOv8} and {RT-DETR} energy efficiency on edge devices for real-time detection},
+  howpublished = {Scientific Reports},
+  year         = {2026},
+  url          = {https://www.nature.com/articles/s41598-026-46453-6}
+  % VERIFY authors, volume, article number
+}
+
+@misc{learnopencv_yolo11_rpi,
+  title        = {{YOLO11} on Raspberry Pi: Optimizing Object Detection for Edge},
+  howpublished = {LearnOpenCV (technical article)},
+  year         = {2024},
+  url          = {https://learnopencv.com/yolo11-on-raspberry-pi/}
+  % Orientation source — prefer a peer-reviewed citation if one covers the same point
+}
+
+% ---------------------------------------------------------------------------
+% Traffic-detection datasets & geographic bias (mixed / unstructured traffic)
+% ---------------------------------------------------------------------------
+@inproceedings{varma2019idd,
+  title     = {{IDD}: A Dataset for Exploring Problems of Autonomous Navigation in Unconstrained Environments},
+  author    = {Varma, Girish and Subramanian, Anbumani and Namboodiri, Anoop and Chandraker, Manmohan and Jawahar, C. V.},
+  booktitle = {IEEE Winter Conference on Applications of Computer Vision (WACV)},
+  year      = {2019}
+  % VERIFY pages; IDD = India Driving Dataset, IIIT-Hyderabad
+}
+
+@inproceedings{kumar2025driveindia,
+  title     = {{DriveIndia}: An Object Detection Dataset for Diverse Indian Traffic Scenes},
+  author    = {Kumar, Rishav and Reddy, D. Santhosh and Rajalakshmi, P.},
+  booktitle = {IEEE International Conference on Intelligent Transportation Systems (ITSC)},
+  year      = {2025},
+  note      = {arXiv:2507.19912}
+}
+
+@misc{uvh2025,
+  title        = {The Urban Vision Hackathon Dataset and Models: Towards Image Annotations and Accurate Vision Models for Indian Traffic},
+  howpublished = {arXiv preprint arXiv:2511.02563},
+  year         = {2025},
+  url          = {https://arxiv.org/abs/2511.02563}
+  % VERIFY author list and venue
+}
+
+% ---------------------------------------------------------------------------
+% Helmet-compliance detection
+% ---------------------------------------------------------------------------
+@article{jia2021helmet,
+  title   = {Real-time automatic helmet detection of motorcyclists in urban traffic using improved {YOLOv5} detector},
+  author  = {Jia, Wei and others},
+  journal = {IET Image Processing},
+  year    = {2021},
+  note    = {doi:10.1049/ipr2.12295}
+  % VERIFY full author list and volume/issue
+}
+
+@article{mdpi2024helmet,
+  title   = {Enforcing Traffic Safety: A Deep Learning Approach for Detecting Motorcyclists' Helmet Violations Using {YOLOv8} and {DCGAN}-Generated Images},
+  author  = {others},
+  journal = {Algorithms (MDPI)},
+  volume  = {17},
+  number  = {5},
+  pages   = {202},
+  year    = {2024},
+  url     = {https://www.mdpi.com/1999-4893/17/5/202}
+  % VERIFY author list
+}
+
+@article{frontiers2025helmet,
+  title   = {Computer-vision based automatic rider helmet violation detection and vehicle identification in Indian smart city scenarios using {NVIDIA TAO} and {YOLOv8}},
+  author  = {others},
+  journal = {Frontiers in Artificial Intelligence},
+  year    = {2025},
+  url     = {https://www.frontiersin.org/articles/10.3389/frai.2025.1582257/full}
+  % VERIFY author list and volume
+}
+
+% ---------------------------------------------------------------------------
+% Traffic-sign recognition (incl. non-Latin / regional signage)
+% ---------------------------------------------------------------------------
+@article{stallkamp2012gtsrb,
+  title   = {Man vs. computer: Benchmarking machine learning algorithms for traffic sign recognition},
+  author  = {Stallkamp, Johannes and Schlipsing, Marc and Salmen, Jan and Igel, Christian},
+  journal = {Neural Networks},
+  volume  = {32},
+  pages   = {323--332},
+  year    = {2012}
+}
+
+@misc{challenging_signs2019,
+  title        = {Challenging Environments for Traffic Sign Detection: Reliability Assessment under Inclement Conditions},
+  howpublished = {arXiv preprint arXiv:1902.06857},
+  year         = {2019},
+  url          = {https://arxiv.org/abs/1902.06857}
+  % VERIFY author list
+}
+
+@misc{signs_survey,
+  title = {Traffic-sign recognition datasets across regions (incl. BanglaTS, PTSD): a survey},
+  note  = {PLACEHOLDER — replace with the actual survey paper that lists STS/LISA/GTSRB/
+           BelgiumTS/TT100K/RTSD/DFG/ARTS/MTSD/BanglaTS/PTSD. Locate primary source.},
+  year  = {2024}
+  % TO FIND — see docs/08_literature_review.md §6 Tier-3
+}
+
+% ---------------------------------------------------------------------------
+% Nepali traffic CV & local context
+% ---------------------------------------------------------------------------
+@inproceedings{pant2015nepali,
+  title     = {Automatic Nepali Number Plate Recognition with Support Vector Machines},
+  author    = {Pant, Ashok Kumar and others},
+  booktitle = {Proceedings of an international conference on software/knowledge/information management and applications},
+  year      = {2015},
+  url       = {http://ashokpant.github.io/publications/ashok_2015_automatic.pdf}
+  % VERIFY exact venue (SKIMA?), co-authors, and pages
+}
+
+@incollection{devanagari_lp2021,
+  title     = {An Approach of {Devanagari} License Plate Detection and Recognition Using Deep Learning},
+  author    = {others},
+  booktitle = {Springer (conference/edited volume)},
+  year      = {2021},
+  note      = {doi:10.1007/978-3-030-88244-0\_9}
+  % VERIFY author list and exact book/series title
+}
+
+@misc{ioegc16,
+  title        = {Proceedings of the 16th {IOE} Graduate Conference},
+  author       = {{Institute of Engineering, Tribhuvan University}},
+  howpublished = {IOE Graduate Conference},
+  year         = {2024},
+  url          = {https://conference.ioe.edu.np/publications/ioegc16/}
+}
+
+% ===========================================================================
+% TO FIND (Tier-3) — add proper entries after locating primary sources:
+%   - A dedicated helmet-detection survey.
+%   - BanglaTS and PTSD (Pakistani Traffic Sign Dataset) primary papers.
+%   - One edge INT8/TFLite/TensorRT quantization accuracy-vs-speed study (for E4).
+%   - The recent Nepali ANPR YOLOv8/YOLOv9 paper referenced in §3.6.
+%   - Re-check (2024-2026) for ANY Nepali traffic-CV detection paper before
+%     finalising the "no prior work" claim.
+% ===========================================================================

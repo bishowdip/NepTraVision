@@ -149,6 +149,10 @@ pip install -e ".[serve]"   # fastapi + uvicorn
 
 ### What's done so far (M0)
 
+- ✅ **Literature review (Week 2):** thematic synthesis across detectors, edge
+  benchmarking, regional-traffic datasets, helmet & sign recognition, and the Nepali
+  context; an evidenced 5-link gap argument; a verified seed bibliography
+  ([`paper/references.bib`](paper/references.bib)) and a living reading matrix.
 - ✅ Project structure, packaging (`pyproject.toml`), `Makefile`, license, ignore rules.
 - ✅ Documentation set: charter, architecture, dataset guide, annotation guidelines,
   class definitions, experiment protocol, reproducibility, ethics. ADR-0001 records
@@ -163,6 +167,9 @@ pip install -e ".[serve]"   # fastapi + uvicorn
 
 ### What's left (next up)
 
+- 🚧 **Literature review polish:** read Tier-1 papers closely; find the Tier-3 "to find"
+  sources (helmet survey, BanglaTS/PTSD, an INT8 edge study, recent Nepali ANPR); re-run
+  the Nepal search before submission to keep the "no prior work" claim honest.
 - ⬜ **Collect footage** across ≥3 locations × ≥2 times of day × ≥2 weather conditions.
 - ⬜ Implement the training runner against Ultralytics (`training/train.py`).
 - ⬜ Implement efficiency + plate-resolution measurement bodies (`evaluation/`).
@@ -179,6 +186,7 @@ A detailed, dated changelog lives in [`docs/CHANGELOG.md`](docs/CHANGELOG.md).
 |---|---|
 | Understand the *why* and the contract of this project | [`docs/00_project_charter.md`](docs/00_project_charter.md) |
 | Understand the code architecture & module boundaries | [`docs/01_architecture.md`](docs/01_architecture.md) |
+| See the literature landscape & the evidenced gap argument | [`docs/08_literature_review.md`](docs/08_literature_review.md), [`docs/literature_matrix.csv`](docs/literature_matrix.csv) |
 | Collect & annotate data correctly | [`docs/02_dataset_guide.md`](docs/02_dataset_guide.md), [`docs/03_annotation_guidelines.md`](docs/03_annotation_guidelines.md) |
 | Know exactly what each class means | [`docs/04_class_definitions.md`](docs/04_class_definitions.md) |
 | Run the experiments / reproduce results | [`docs/05_experiment_protocol.md`](docs/05_experiment_protocol.md), [`docs/06_reproducibility.md`](docs/06_reproducibility.md) |

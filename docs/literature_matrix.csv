@@ -1,0 +1,24 @@
+bib_key,short_citation,year,region,task,model_or_method,dataset,dataset_size,headline_metric,addresses_rq,relevance_to_gap,read_status,notes
+redmon2016yolo,"Redmon et al., YOLO",2016,General,Object detection,YOLO (1-stage),PASCAL VOC/COCO,-,real-time mAP,RQ2,Foundational real-time detector; baseline lineage,to_read,Read for the detector-family framing
+ren2015faster,"Ren et al., Faster R-CNN",2015,General,Object detection,Faster R-CNN (2-stage),PASCAL VOC,-,mAP,RQ2,Accuracy baseline / contrast to 1-stage,to_read,
+liu2016ssd,"Liu et al., SSD",2016,General,Object detection,SSD (1-stage),PASCAL VOC/COCO,-,mAP/FPS,RQ2,Edge-style single-shot baseline,to_read,
+tan2020efficientdet,"Tan et al., EfficientDet",2020,General,Object detection,EfficientDet,COCO,-,mAP vs FLOPs,RQ2,Efficiency-oriented non-YOLO contrast,to_read,
+zhao2024rtdetr,"Zhao et al., RT-DETR",2024,General,Object detection,RT-DETR (transformer),COCO,-,mAP/FPS,RQ2,Modern non-YOLO real-time contrast,to_read,
+wang2024yolov10,"Wang et al., YOLOv10",2024,General,Object detection,YOLOv10 (NMS-free),COCO,-,mAP/latency,RQ2,Recent nano model for the zoo,to_read,Verify author list
+jocher2023yolov8,"Jocher et al., Ultralytics YOLOv8",2023,General,Object detection,YOLOv8,COCO,-,-,RQ2,Project base model,to_read,Software citation
+jocher2024yolo11,"Jocher & Qiu, YOLO11",2024,General,Object detection,YOLO11,COCO,-,-37% params vs v8,RQ2,Strong edge candidate,to_read,Verify year
+lin2014coco,"Lin et al., MS COCO",2014,Western,Dataset,-,COCO,330k imgs,-,RQ1,Pretraining source; Western object bias,to_read,
+alqahtani2024edge,"Alqahtani et al., Edge DL eval",2024,General,Edge benchmark,YOLOv8/EffDet-Lite/SSD,COCO-class,-,latency/energy/mAP on Pi & Jetson,RQ2,TEMPLATE for our E2/E4 protocol,to_read,Tier-1 read
+nature2026_yolo_rtdetr_energy,"YOLOv8 vs RT-DETR energy on edge",2026,General,Edge benchmark,YOLOv8/RT-DETR,-,-,energy/thermal,RQ2,Energy axis for edge,to_read,Verify metadata
+varma2019idd,"Varma et al., IDD",2019,India,Dataset/detection,-,IDD,10004 imgs,-,RQ1,GAP TEMPLATE: Western benchmarks fail on unstructured roads,to_read,Tier-1 read
+kumar2025driveindia,"Kumar et al., DriveIndia",2025,India,Dataset/detection,YOLO,DriveIndia,-,-,RQ1,Recent regional traffic dataset precedent,to_read,ITSC 2025
+uvh2025,"UVH-26 dataset",2025,India,Dataset/detection,-,UVH-26,26646 imgs / 1.8M boxes,-,RQ1,CCTV regional set; 14 India vehicle classes,to_read,Verify authors
+jia2021helmet,"Jia et al., helmet YOLOv5",2021,Urban,Helmet detection,improved YOLOv5,custom,-,real-time mAP,RQ2,Helmet detection precedent,to_read,Verify authors
+mdpi2024helmet,"Helmet violation YOLOv8+DCGAN",2024,General,Helmet detection,YOLOv8+DCGAN,custom,3146 imgs,mAP 0.98,RQ2,Class-imbalance handling for helmet,to_read,Verify authors
+frontiers2025helmet,"Rider helmet violation, Indian smart city",2025,India,Helmet+vehicle ID,YOLOv8+TAO,custom,-,-,RQ2,City-scale helmet pipeline precedent,to_read,Verify authors
+stallkamp2012gtsrb,"Stallkamp et al., GTSRB",2012,Germany,Sign recognition,CNN,GTSRB,51839 imgs / 43 cls,classification acc,RQ3,Canonical sign benchmark; Western,to_read,Tier-1 read
+challenging_signs2019,"Challenging environments for sign detection",2019,General,Sign detection,-,-,-,reliability,RQ3/RQ4,Faded/occluded sign failure modes,to_read,Verify authors
+signs_survey,"Regional sign datasets survey (BanglaTS/PTSD)",2024,South Asia,Sign datasets,-,multiple,-,-,RQ3,Under-served non-Latin signage,to_find,PLACEHOLDER - locate primary survey
+pant2015nepali,"Pant et al., Nepali plate SVM",2015,Nepal,License plate,SVM,custom Nepali LP,-,-,RQ1,LOCAL PRECEDENT: Nepali CV is plate-only,to_read,Tier-1 read; verify venue
+devanagari_lp2021,"Devanagari LP detection (deep learning)",2021,Nepal/India,License plate,YOLOv3+CNN,custom,19663 chars,95.5% whole-LP,RQ1,Devanagari plate recognition,to_read,Verify authors
+ioegc16,"16th IOE Graduate Conference proceedings",2024,Nepal,Traffic engineering,-,-,~200 papers,-,RQ1,LOCAL GAP: no traffic-CV detection work,to_read,Skim TOC to confirm gap
