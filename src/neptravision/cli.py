@@ -28,8 +28,10 @@ app = typer.Typer(
 )
 data_app = typer.Typer(help="Dataset pipeline: extract → dedup → select → split → convert → stats.")
 ann_app = typer.Typer(help="Annotation quality: validate labels, inter-annotator agreement.")
+analyze_app = typer.Typer(help="Analysis: Pareto frontier and other paper figures.")
 app.add_typer(data_app, name="data")
 app.add_typer(ann_app, name="annotation")
+app.add_typer(analyze_app, name="analyze")
 
 console = Console()
 
@@ -260,6 +262,79 @@ def train(
     data_yaml = PATHS.dataset / "data.yaml"
     run = train_one(model, data_yaml, seed=seed, imgsz=imgsz)
     console.print(f"Done. Run dir: {run.dir}")
+
+
+@app.command("benchmark")
+def benchmark(
+    experiment: str = typer.Option(..., help="Experiment id, e.g. e1_baselines."),
+    dry_run: bool = typer.Option(
+        False, "--dry-run",
+        help="Simulate metrics (no torch/data) to validate the pipeline and produce demo tables.",
+    ),
+) -> None:
+    """Run an experiment config → result tables in results/tables/.
+
+    Use --dry-run to exercise the full flow without training; drop it (and install the
+    [train] extra + build the dataset) for real numbers.
+    """
+    from .benchmark.runner import run_benchmark
+
+    data_yaml = PATHS.dataset / "data.yaml"
+    result = run_benchmark(
+        experiment, dry_run=dry_run,
+        data_yaml=data_yaml if data_yaml.is_file() else None,
+    )
+    if result.dry_run:
+        console.print("[yellow]⚠ Simulated numbers (simulated=true) — demo/testing only.[/yellow]")
+    console.print(f"Accuracy table → {result.accuracy_table}")
+    if result.efficiency_table:
+        console.print(f"Efficiency table → {result.efficiency_table}")
+
+
+@app.command("eval")
+def eval_model(
+    model: str = typer.Option(..., help="Model name (for labelling the result)."),
+    weights: Path = typer.Option(..., help="Trained .pt checkpoint to evaluate."),
+    split: str = typer.Option("test", help="Dataset split to evaluate on."),
+    imgsz: int = typer.Option(640, help="Evaluation input size."),
+) -> None:
+    """Evaluate a trained checkpoint on a split. Requires the [train] extra."""
+    from .evaluation.metrics import evaluate_ultralytics
+
+    data_yaml = PATHS.dataset / "data.yaml"
+    metrics = evaluate_ultralytics(weights, data_yaml, model_name=model, split=split, imgsz=imgsz)
+    console.print(
+        f"[bold]{model}[/bold]  mAP50={metrics.map50:.3f}  mAP50-95={metrics.map50_95:.3f}  "
+        f"P={metrics.precision:.3f}  R={metrics.recall:.3f}  F1={metrics.f1:.3f}"
+    )
+
+
+@analyze_app.command("pareto")
+def analyze_pareto(
+    experiment: str = typer.Option("e2_efficiency", help="Experiment id whose tables to read."),
+    tier: str = typer.Option(None, help="Hardware tier to plot (default: all tiers in the table)."),
+) -> None:
+    """Plot the accuracy-vs-FPS Pareto frontier per hardware tier → results/figures/."""
+    from .analysis.pareto import load_pareto_points, plot_pareto
+    from .benchmark.tables import read_table
+
+    acc_csv = PATHS.results_tables / f"{experiment}_accuracy.csv"
+    eff_csv = PATHS.results_tables / f"{experiment}_efficiency.csv"
+    for path in (acc_csv, eff_csv):
+        if not path.is_file():
+            raise typer.BadParameter(
+                f"Missing {path.name}. Run the benchmark for '{experiment}' first."
+            )
+
+    tiers = [tier] if tier else sorted({r["hardware_tier"] for r in read_table(eff_csv)})
+    for t in tiers:
+        points = load_pareto_points(acc_csv, eff_csv, t)
+        if not points:
+            console.print(f"[yellow]No points for tier '{t}'.[/yellow]")
+            continue
+        out = PATHS.results_figures / f"pareto_{experiment}_{t}.png"
+        plot_pareto(points, out, title=f"Accuracy vs. FPS — {t}", xlabel="FPS", ylabel="mAP@0.5")
+        console.print(f"Pareto figure ({t}) → {out}")
 
 
 @app.command("serve")

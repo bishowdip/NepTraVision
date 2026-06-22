@@ -168,18 +168,25 @@ pip install -e ".[serve]"   # fastapi + uvicorn
 - ✅ Data pipeline (runnable now): frame extraction, perceptual-hash dedup,
   image selection, **leakage-safe split-by-source**, YOLO/COCO conversion, dataset stats.
 - ✅ Annotation tooling: inter-annotator agreement + label validators.
-- ✅ Scaffolding with clear interfaces for training / evaluation / analysis / prototype.
-- ✅ Test suite for the data-pipeline core.
+- ✅ **Benchmark pipeline wired & runnable:** an experiment runner that reads the E1–E6
+  configs and writes result tables, the `eval` / `benchmark` / `analyze pareto` CLI, the
+  efficiency-measurement protocol, and the accuracy-vs-FPS Pareto frontier — all proven
+  end-to-end via a `--dry-run` mode (deterministic *simulated* metrics, no torch/data),
+  so real runs need only the dataset + the `[train]` extra.
+- ✅ Scaffolding with clear interfaces for the remaining pieces (training real-mode,
+  condition breakdown, prototype).
+- ✅ Test suite for the data-pipeline **and benchmark** core (36 tests).
 
 ### What's left (next up)
 
 - 🚧 **Literature review polish:** read Tier-1 papers closely; find the Tier-3 "to find"
   sources (helmet survey, BanglaTS/PTSD, an INT8 edge study, recent Nepali ANPR); re-run
   the Nepal search before submission to keep the "no prior work" claim honest.
-- ⬜ **Collect footage** across ≥3 locations × ≥2 times of day × ≥2 weather conditions.
-- ⬜ Implement the training runner against Ultralytics (`training/train.py`).
-- ⬜ Implement efficiency + plate-resolution measurement bodies (`evaluation/`).
-- ⬜ Wire the prototype inference + dashboard (`prototype/`).
+- ⬜ **Collect footage** across ≥3 locations × ≥2 times of day × ≥2 weather conditions
+  (the one genuinely blocked task — needs filming).
+- ⬜ Run the benchmark for real (needs the dataset + `pip install -e ".[train]"`); the
+  orchestration, tables, and figures are already done and tested.
+- ⬜ Implement the E5 condition-breakdown slice evaluation (`evaluation/condition_breakdown.py`).
 - ⬜ Fill the paper outline in `paper/`.
 
 A detailed, dated changelog lives in [`docs/CHANGELOG.md`](docs/CHANGELOG.md).

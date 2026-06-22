@@ -3,6 +3,27 @@
 All notable changes to NepTraVision are recorded here. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/). Dates are absolute.
 
+## [Unreleased] — 2026-06-22 — Benchmark pipeline wired (M2–M4 plumbing)
+
+### Added
+- `neptravision/benchmark/`: orchestration layer — `runner.run_benchmark()` reads an
+  experiment config and writes result tables (`tables.py`), with a `--dry-run` mode
+  backed by deterministic, param-count-derived synthetic metrics (`synthetic.py`) so the
+  whole flow runs without torch/Ultralytics or a dataset.
+- CLI: `neptravision benchmark --experiment <id> [--dry-run]`, `neptravision eval`, and
+  `neptravision analyze pareto` (one figure per hardware tier).
+- `analysis/pareto.load_pareto_points()`: joins the accuracy + efficiency tables on model
+  for a given hardware tier.
+- 8 benchmark tests (synthetic determinism, tier ordering, aggregation, full dry-run,
+  Pareto join + frontier, table round-trip). Suite now 36 tests.
+
+### Notes
+- Real mode (no `--dry-run`) trains + evaluates via Ultralytics and measures latency with
+  the shared protocol; it needs the dataset (`data.yaml`) and the `[train]` extra.
+- Verified end-to-end in dry-run: E2 → accuracy/efficiency tables → 3 Pareto figures
+  (one per tier), with dominated models correctly excluded from the frontier. Simulated
+  outputs are tagged `simulated=true` and are **not** committed to `results/`.
+
 ## [Unreleased] — 2026-06-21 — Capture log for phone footage (M1 prep)
 
 ### Added

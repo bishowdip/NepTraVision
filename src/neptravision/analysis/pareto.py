@@ -25,6 +25,39 @@ class Point:
     accuracy: float   # y-axis: higher is better (e.g. mAP@0.5)
 
 
+def load_pareto_points(
+    accuracy_csv: Path,
+    efficiency_csv: Path,
+    hardware_tier: str,
+    *,
+    accuracy_field: str = "map50_mean",
+) -> list[Point]:
+    """Join an accuracy table and an efficiency table into Pareto points for one tier.
+
+    Reads the aggregated accuracy CSV (one row per model) and the efficiency CSV (one row
+    per model × hardware tier), matching on ``model`` for the requested ``hardware_tier``.
+    Each point is (model, fps, accuracy). Pure CSV — no pandas.
+    """
+    from ..benchmark.tables import read_table
+
+    accuracy_by_model = {r["model"]: r for r in read_table(accuracy_csv)}
+    points: list[Point] = []
+    for eff in read_table(efficiency_csv):
+        if eff.get("hardware_tier") != hardware_tier:
+            continue
+        acc = accuracy_by_model.get(eff["model"])
+        if acc is None:
+            continue
+        points.append(
+            Point(
+                label=eff["model"],
+                fps=float(eff["fps"]),
+                accuracy=float(acc[accuracy_field]),
+            )
+        )
+    return points
+
+
 def pareto_frontier(points: list[Point]) -> list[Point]:
     """Return the Pareto-optimal points (maximise both fps and accuracy).
 
